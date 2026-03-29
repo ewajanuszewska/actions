@@ -3,7 +3,11 @@ name: Python - tests
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '.github/workflows/*'
   pull_request:
+    types:
+      - opened
   workflow_dispatch:
 
 jobs:
@@ -26,3 +30,14 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p path/to/artifact
+          echo hello > path/to/artifact/world.txt
+        
+      - name: Upload artifacts
+        uses:
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
