@@ -54,8 +54,9 @@ jobs:
           path: path/to/artifact
       - name: Publish filename
         id: publish
-        run: find path/* -type f -execdir echo "::set-output name=script-file={}" >> "$GITHUB_OUTPUT" ';'
-  print:
+        run: |
+          FILE=$(find path -type f | head -n 1)
+          echo "script-file=$FILE" >> $GITHUB_OUTPUT  print:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
