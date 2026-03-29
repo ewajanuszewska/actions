@@ -54,4 +54,4 @@ jobs:
           path: path/to/artifact/world.txt
       - name: Publish filename
         id: publishz
-        run: find path/* -type f -execdir echo "script-file={}" >> "$GITHUB_OUTPUT" ';'
+        run: find path/* -type f -execdir echo "::set-output name=script-file={}" >> "$GITHUB_OUTPUT" ';'
