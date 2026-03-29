@@ -41,3 +41,14 @@ jobs:
         with:
           name: my-artifact
           path: path/to/artifact/world.txt
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
+      - name: Publish filename
+        run: find path/* -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
