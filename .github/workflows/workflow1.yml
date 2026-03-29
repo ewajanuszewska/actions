@@ -44,6 +44,8 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{ steps.publish.outputs.script-file }}
     steps:
       - name: Upload artifacts
         uses: actions/download-artifact@v4
@@ -51,4 +53,5 @@ jobs:
           name: my-artifact
           path: path/to/artifact/world.txt
       - name: Publish filename
+        id: publishz
         run: find path/* -type f -execdir echo "script-file={}" >> "$GITHUB_OUTPUT" ';'
