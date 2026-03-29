@@ -53,5 +53,11 @@ jobs:
           name: my-artifact
           path: path/to/artifact/world.txt
       - name: Publish filename
-        id: publishz
+        id: publish
         run: find path/* -type f -execdir echo "::set-output name=script-file={}" >> "$GITHUB_OUTPUT" ';'
+  print:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print filename
+        run: echo "${{ needs.build.outputs.script-file  }}"
