@@ -29,7 +29,7 @@ jobs:
           fi
   test:
     needs: changes
-    if: ${{ needs.changes.outputs.run_tests == 'true' }}  
+    if: ${{ always() }}
     strategy:
       matrix:
         python: ["3.10", "3.11"]
