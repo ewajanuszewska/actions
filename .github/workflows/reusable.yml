@@ -28,10 +28,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - run: |
+      - name: Print Python version
+        run: |
           echo "Testing on Python ${{ inputs.python_version }}"
 
       - name: Run tests
         run: pytest
-
-      - name: Prep
